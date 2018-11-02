@@ -4,6 +4,7 @@
 #include <qopenglextrafunctions.h>
 #include <qmatrix4x4.h>
 #include <Shader.h>
+#include <VAO.h>
 
 class MainWindow : public QOpenGLWindow
 {
@@ -12,7 +13,7 @@ class MainWindow : public QOpenGLWindow
 	QMatrix4x4 PROJ, VIEW, MODEL;
 	qreal FOV = 90;
 
-	GLuint VAO;
+	VAO *vao;
 	Shader *sh;
 
 public:
