@@ -23,18 +23,41 @@ public:
 		f->glBindVertexArray(0);
 	}
 
-	void create(GLuint *vertices, GLuint vert_size, GLuint *indices, GLuint ind_size, GLenum type)
+	//Vertices structure: X-Y-Z-R-G-B-S-T
+	//Indices structure: I
+	//***_size = size in BYTES
+	//Type: GL_FLOAT
+	void create(GLfloat *vertices, GLuint vert_size, GLuint *indices, GLuint ind_size)
 	{
 		f->glGenBuffers(1, &vbo);
 		f->glGenBuffers(1, &ebo);
 		f->glGenVertexArrays(1, &vao);
 		f->glBindVertexArray(vao);
 		f->glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		f->glBufferData(GL_ARRAY_BUFFER, vert_size, vertices, GL_DYNAMIC_DRAW);
+		f->glBufferData(GL_ARRAY_BUFFER, vert_size, vertices, GL_STATIC_DRAW);
 		f->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 		f->glBufferData(GL_ELEMENT_ARRAY_BUFFER, ind_size, indices, GL_STATIC_DRAW);
-		f->glVertexAttribPointer(0, 3, type, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+		f->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 32, (GLvoid*)0);
 		f->glEnableVertexAttribArray(0);
+		f->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 32, (GLvoid*)12);
+		f->glEnableVertexAttribArray(1);
+		f->glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 32, (GLvoid*)24);
+		f->glEnableVertexAttribArray(2);
+		f->glBindVertexArray(0);
+	}
+	void create(GLfloat *vertices, GLuint vert_size)
+	{
+		f->glGenBuffers(1, &vbo);
+		f->glGenVertexArrays(1, &vao);
+		f->glBindVertexArray(vao);
+		f->glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		f->glBufferData(GL_ARRAY_BUFFER, vert_size, vertices, GL_STATIC_DRAW);
+		f->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 32, (GLvoid*)0);
+		f->glEnableVertexAttribArray(0);
+		f->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 32, (GLvoid*)12);
+		f->glEnableVertexAttribArray(1);
+		f->glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 32, (GLvoid*)24);
+		f->glEnableVertexAttribArray(2);
 		f->glBindVertexArray(0);
 	}
 };

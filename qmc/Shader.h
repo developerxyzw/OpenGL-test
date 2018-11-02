@@ -2,6 +2,7 @@
 #define SHADER_H
 
 #include <QOpenGLExtraFunctions>
+#include <QMatrix4x4>
 
 #include <string>
 #include <fstream>
@@ -80,17 +81,37 @@ public:
 	// ------------------------------------------------------------------------
 	void setBool(const std::string &name, bool value) const
 	{
-		f->glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
+		f->glUniform1i(f->glGetUniformLocation(ID, name.c_str()), (int)value);
 	}
 	// ------------------------------------------------------------------------
 	void setInt(const std::string &name, int value) const
 	{
-		f->glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
+		f->glUniform1i(f->glGetUniformLocation(ID, name.c_str()), value);
 	}
 	// ------------------------------------------------------------------------
 	void setFloat(const std::string &name, float value) const
 	{
-		f->glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+		f->glUniform1f(f->glGetUniformLocation(ID, name.c_str()), value);
+	}
+	// ------------------------------------------------------------------------
+	void setFloat2(const std::string &name, float value1, float value2) const
+	{
+		f->glUniform2f(f->glGetUniformLocation(ID, name.c_str()), value1, value2);
+	}
+	// ------------------------------------------------------------------------
+	void setFloat3(const std::string &name, float value1, float value2, float value3) const
+	{
+		f->glUniform3f(f->glGetUniformLocation(ID, name.c_str()), value1, value2, value3);
+	}
+	// ------------------------------------------------------------------------
+	void setFloat4(const std::string &name, float value1, float value2, float value3, float value4) const
+	{
+		f->glUniform4f(f->glGetUniformLocation(ID, name.c_str()), value1, value2, value3, value4);
+	}
+	// ------------------------------------------------------------------------
+	void setMat4(const std::string &name, const QMatrix4x4 &mat) const
+	{
+		f->glUniformMatrix4fv(f->glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, mat.data());
 	}
 
 private:

@@ -115,6 +115,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainWindow.h" />
@@ -123,7 +124,10 @@
     <QtRcc Include="MainWindow.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GraphicsObject.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="STB_Image.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="VAO.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
