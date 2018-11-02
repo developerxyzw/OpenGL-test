@@ -30,6 +30,7 @@ void MainWindow::initializeGL()
 	f->glEnable(GL_BLEND);// you enable blending function
 	f->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	//Set up VAO
 	GLfloat vertices[] = {
 		// positions          // colors           // texture coords
 		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
@@ -45,19 +46,24 @@ void MainWindow::initializeGL()
 	vao = new VAO(f);
 	vao->create(vertices, sizeof(vertices), indices, sizeof(indices));
 
+	//Create Shaders
 	sh = new Shader(f, "./Shader/basic.v", "./Shader/basic.f");
 
+	//Load textures
 	texture = LoadTexture(f, "d://SOURCE//c-cxx//qt//qmc//qmc//Textures//logo.png");
 
+	//Finalizing OpenGL init
 	f->glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
 
+//Set up viewport when we resize
 void MainWindow::resizeGL(int w, int h)
 {
 	f->glViewport(0, 0, w, h);
 	update();
 }
 
+//Render everything
 void MainWindow::paintGL()
 {
 	makeCurrent();

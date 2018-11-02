@@ -3,6 +3,7 @@
 #include <QOpenGLExtraFunctions>
 #include <qdebug.h>
 
+//Just load texture
 unsigned LoadTexture(QOpenGLExtraFunctions *f, char* path)
 {
 	unsigned int texture;

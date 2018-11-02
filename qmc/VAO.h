@@ -24,7 +24,6 @@ public:
 	}
 
 	//Vertices structure: X-Y-Z-R-G-B-S-T
-	//Indices structure: I
 	//***_size = size in BYTES
 	//Type: GL_FLOAT
 	void create(GLfloat *vertices, GLuint vert_size, GLuint *indices, GLuint ind_size)
