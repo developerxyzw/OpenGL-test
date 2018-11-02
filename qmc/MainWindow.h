@@ -1,15 +1,25 @@
 #pragma once
 
-#include <QtWidgets/QWidget>
-#include "ui_MainWindow.h"
+#include <QOpenGLWindow>
+#include <qopenglextrafunctions.h>
+#include <qmatrix4x4.h>
 
-class MainWindow : public QWidget
+class MainWindow : public QOpenGLWindow
 {
-	Q_OBJECT
+	Q_OBJECT;
+	QOpenGLExtraFunctions *f;
+	QMatrix4x4 PROJ, VIEW, MODEL;
+	qreal FOV = 90;
+
+	GLuint VAO;
+	GLuint sh_p;
+	
 
 public:
-	MainWindow(QWidget *parent = Q_NULLPTR);
+	MainWindow(QOpenGLContext *context, QOpenGLWindow *parent = Q_NULLPTR);
 
-private:
-	Ui::MainWindowClass ui;
+public:
+	void initializeGL();
+	void resizeGL(int w, int h);
+	void paintGL();
 };

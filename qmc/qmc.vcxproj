@@ -120,9 +120,6 @@
     <QtMoc Include="MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="MainWindow.ui" />
-  </ItemGroup>
-  <ItemGroup>
     <QtRcc Include="MainWindow.qrc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
