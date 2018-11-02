@@ -3,6 +3,7 @@
 #include <QOpenGLWindow>
 #include <qopenglextrafunctions.h>
 #include <qmatrix4x4.h>
+#include <Shader.h>
 
 class MainWindow : public QOpenGLWindow
 {
@@ -12,8 +13,7 @@ class MainWindow : public QOpenGLWindow
 	qreal FOV = 90;
 
 	GLuint VAO;
-	GLuint sh_p;
-	
+	Shader *sh;
 
 public:
 	MainWindow(QOpenGLContext *context, QOpenGLWindow *parent = Q_NULLPTR);
