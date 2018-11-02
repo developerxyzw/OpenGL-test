@@ -1,6 +1,8 @@
 #include "MainWindow.h"
 #include <QtWidgets/QApplication>
 
+//LOCAL INFO: how to push (if I ever forget it): TeamExplorer->Sync->Actions:OpenInCommandPrompt->RunCommand:"git push"
+
 static QSurfaceFormat createSurfaceFormat()
 {
 	QSurfaceFormat format;
