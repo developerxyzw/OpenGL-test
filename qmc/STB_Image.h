@@ -103,8 +103,6 @@ Christian Floisand      Kevin Schmidt                         github:darealshinj
 Blazej Dariusz Roszkowski                                     github:Michaelangel007
 */
 
-#define STB_IMAGE_IMPLEMENTATION
-
 #ifndef STBI_INCLUDE_STB_IMAGE_H
 #define STBI_INCLUDE_STB_IMAGE_H
 

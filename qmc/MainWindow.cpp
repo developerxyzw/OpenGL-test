@@ -31,23 +31,61 @@ void MainWindow::initializeGL()
 
 	f->glEnable(GL_BLEND);// you enable blending function
 	f->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	f->glEnable(GL_TEXTURE_2D_MULTISAMPLE);
+	f->glEnable(GL_DEPTH_TEST);
 
 	//Set up VAO
 	GLfloat vertices[] = {
-		// positions          // colors           // texture coords
-		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 0.0f,   // top right
-		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 1.0f,   // bottom right
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 1.0f,  // bottom left
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 0.0f   // top left 
-	};
-	GLuint indices[] = {
-		0, 1, 3,
-		1, 2, 3,
+		//Front
+		0.f, 0.f, 0.f,  0.0f, 0.0f,
+		1.f, 0.f, 0.f,  1.0f, 0.0f,
+		1.f, 1.f, 0.f,  1.0f, 1.0f,
+		1.f, 1.f, 0.f,  1.0f, 1.0f,
+		0.f, 1.f, 0.f,  0.0f, 1.0f,
+		0.f, 0.f, 0.f,  0.0f, 0.0f,
+
+		//Back
+		0.f, 0.f, 1.f,  0.0f, 0.0f,
+		1.f, 0.f, 1.f,  1.0f, 0.0f,
+		1.f, 1.f, 1.f,  1.0f, 1.0f,
+		1.f, 1.f, 1.f,  1.0f, 1.0f,
+		0.f, 1.f, 1.f,  0.0f, 1.0f,
+		0.f, 0.f, 1.f,  0.0f, 0.0f,
+
+		//Left
+		0.f, 1.f, 1.f,  1.0f, 0.0f,
+		0.f, 1.f, 0.f,  1.0f, 1.0f,
+		0.f, 0.f, 0.f,  0.0f, 1.0f,
+		0.f, 0.f, 0.f,  0.0f, 1.0f,
+		0.f, 0.f, 1.f,  0.0f, 0.0f,
+		0.f, 1.f, 1.f,  1.0f, 0.0f,
+
+		//Right
+		1.f, 1.f, 1.f,  1.0f, 0.0f,
+		1.f, 1.f, 0.f,  1.0f, 1.0f,
+		1.f, 0.f, 0.f,  0.0f, 1.0f,
+		1.f, 0.f, 0.f,  0.0f, 1.0f,
+		1.f, 0.f, 1.f,  0.0f, 0.0f,
+		1.f, 1.f, 1.f,  1.0f, 0.0f,
+
+		//Up
+		0.f, 1.f, 0.f,  0.0f, 1.0f,
+		1.f, 1.f, 0.f,  1.0f, 1.0f,
+		1.f, 1.f, 1.f,  1.0f, 0.0f,
+		1.f, 1.f, 1.f,  1.0f, 0.0f,
+		0.f, 1.f, 1.f,  0.0f, 0.0f,
+		0.f, 1.f, 0.f,  0.0f, 1.0f,
+
+		//Down
+		0.f, 0.f, 0.f,  0.0f, 1.0f,
+		1.f, 0.f, 0.f,  1.0f, 1.0f,
+		1.f, 0.f, 1.f,  1.0f, 0.0f,
+		1.f, 0.f, 1.f,  1.0f, 0.0f,
+		0.f, 0.f, 1.f,  0.0f, 0.0f,
+		0.f, 0.f, 0.f,  0.0f, 1.0f,
 	};
 
 	vao = new VAO(f);
-	vao->create(vertices, sizeof(vertices), indices, sizeof(indices));
+	vao->create(vertices, sizeof(vertices));
 
 	//Create Shaders
 	sh = new Shader(f, "./Shader/basic.v", "./Shader/basic.f");
@@ -73,7 +111,7 @@ void MainWindow::resizeGL(int w, int h)
 void MainWindow::paintGL()
 {
 	makeCurrent();
-	f->glClear(GL_COLOR_BUFFER_BIT);
+	f->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	sh->use();
 	f->glActiveTexture(GL_TEXTURE0); // activate the texture unit first before binding texture
@@ -84,13 +122,17 @@ void MainWindow::paintGL()
 	//sh->setInt("texture1", texture2); //IDK Y I dun need it there, but in tex0 I need it..
 	QMatrix4x4 MODEL;
 	MODEL.rotate(-55.f, 1.f, 0.f, 0.f);
+	MODEL.rotate( 50.f, 0.f, 1.f, 0.f);
+	MODEL.rotate( 15.f, 0.f, 0.f, 1.f);
+	MODEL.scale(0.8);
+	MODEL.translate(-0.5, -0.5, -0.5);
 	sh->setMat4("model", MODEL);
 	VIEW.setToIdentity();
-	VIEW.translate(0.f, 0.f, -3.f);
+	VIEW.translate(0.f, 0.f, -2.f);
 	sh->setMat4("view", VIEW);
 	sh->setMat4("proj", PROJ);
 	vao->bind();
-	f->glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	f->glDrawArrays(GL_TRIANGLES, 0, 36);
 	vao->unbind();
 
 	QThread::currentThread()->msleep(1000 / 30);

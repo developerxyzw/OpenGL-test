@@ -115,6 +115,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="STB_Image.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +125,7 @@
     <QtRcc Include="MainWindow.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="GraphicsObject.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="STB_Image.h" />

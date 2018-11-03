@@ -5,6 +5,7 @@
 #include <qmatrix4x4.h>
 #include <Shader.h>
 #include <VAO.h>
+#include "Cube.h"
 
 class MainWindow : public QOpenGLWindow
 {
