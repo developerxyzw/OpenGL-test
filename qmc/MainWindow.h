@@ -11,10 +11,12 @@ class MainWindow : public QOpenGLWindow
 	Q_OBJECT;
 	QOpenGLExtraFunctions *f;
 
+	QMatrix4x4 VIEW, PROJ;
+
 	VAO *vao;
 	Shader *sh;
 
-	GLuint texture;
+	GLuint texture, texture2;
 
 public:
 	MainWindow(QOpenGLContext *context, QOpenGLWindow *parent = Q_NULLPTR);

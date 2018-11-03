@@ -1,4 +1,4 @@
 #pragma once
 class QOpenGLExtraFunctions;
-unsigned LoadTexture(QOpenGLExtraFunctions *f, char* path);
+unsigned LoadTexture(QOpenGLExtraFunctions *f, char* path, bool bAlpha);
 
